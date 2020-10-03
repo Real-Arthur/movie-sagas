@@ -44,7 +44,7 @@ class Home extends Component {
 
                     <Grid item xs={4} container direction="column">
                         <Grid item xs>
-                            <Typography variant="h3">
+                            <Typography variant="h4">
                             {movie.title}
                             </Typography>
                         </Grid>
