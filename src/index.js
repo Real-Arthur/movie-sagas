@@ -36,7 +36,7 @@ function* fetchMoviesSaga(action) {
         payload: response.data
     })
 }
-
+// Saga used to fetch details for a specific movie
 function* fetchMoviesIdSaga(action) {
     console.log('fetchMoviesIdSaga', action.type, action.payload)
     let response = yield axios({
@@ -52,7 +52,7 @@ function* fetchMoviesIdSaga(action) {
         payload: response.data[0]
     })
 }
-
+// Saga used to create new movie
 function* createMoviesIdSaga(action) {
     console.log('createMoviesIdSaga', action.type, action.payload)
     yield axios({
@@ -64,7 +64,7 @@ function* createMoviesIdSaga(action) {
         type: 'FETCH_MOVIES'
     })
 }
-
+// Saga used to fetch genre of specific movie
 function* fetchMoviesGenresSaga(action) {
     console.log('fetchMoviesGenresSaga', action.type, action.payload)
     let response = yield axios({
@@ -80,7 +80,6 @@ function* fetchMoviesGenresSaga(action) {
         payload: response.data
     })
 }
-
 // Used to store movies returned from the server
 const movies = (state = [], action) => {
     switch (action.type) {
@@ -92,7 +91,7 @@ const movies = (state = [], action) => {
             return state;
     }
 }
-
+// Used to store id of current specific movie
 const currentMovie = (state = [], action) => {
     switch(action.type) {
         case 'SET_MOVIES_ID':
@@ -101,7 +100,6 @@ const currentMovie = (state = [], action) => {
             return state;
     }
 }
-
 // Used to store the movie genres
 const genres = (state = [], action) => {
     switch (action.type) {
@@ -111,7 +109,6 @@ const genres = (state = [], action) => {
             return state;
     }
 }
-
 // Create one store that all components can use
 const storeInstance = createStore(
     combineReducers({
@@ -122,7 +119,6 @@ const storeInstance = createStore(
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
 );
-
 // Pass rootSaga into our sagaMiddleware
 sagaMiddleware.run(rootSaga);
 

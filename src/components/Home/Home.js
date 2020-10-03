@@ -3,30 +3,32 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 class Home extends Component {
-    state = {
-
-    }
+   // Calls getMovies on load
     componentDidMount() {
         this.getMovies();
     }
-
+    // Starts FETCH_MOVIES saga to initiate database GET call for movie list
     getMovies = () => {
         this.props.dispatch({
             type: 'FETCH_MOVIES'
         })
     }
-
+    // Starts two details sagas to initiate database GET call for specific movie details
+    // then sends user to movie details page
     goToDetails = (value) => {
         console.log('POSTER BUTTON', value);
         console.log('props', this.props);
+        // Gets movie details
         this.props.dispatch({
             type: 'FETCH_MOVIES_ID',
             payload: value
         })
+        // Gets specific movie's genres
         this.props.dispatch({
             type: 'FETCH_GENRES',
             payload: value
         })
+        // Kicks user to details page
         this.props.history.push('/details')
     }
 

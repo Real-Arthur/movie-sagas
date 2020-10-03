@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
     res.sendStatus(500);
   });
 })
-
+// Pulls details of specific movie from database
 router.get('/:id', (req, res) => {
   console.log('MOVIES ID ROUTER GET', req);
   const movieQuery = `SELECT * FROM "movies" WHERE id=$1;`;

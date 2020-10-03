@@ -4,30 +4,9 @@ import { withRouter } from 'react-router-dom';
 
 
 class Details extends Component {
-    componentDidMount() {
-        // this.getGenres();
-    }
-    state = {
-
-    }
-
-    getGenres = () => {
-        this.props.dispatch({
-            type: 'FETCH_GENRES',
-            payload: this.props.currentMovieId
-        })
-    }
-
+    // Sends user back to landing page
     refreshList = () => {
-        console.log('refersh button');  
-        this.props.dispatch({
-            type: 'FETCH_MOVIES'
-        })
-        this.props.history.push('/')
-    }
-
-    backToList = () => {
-        console.log('back button');
+        console.log('refresh button works');
         this.props.history.push('/')
     }
 
@@ -38,6 +17,7 @@ class Details extends Component {
                 <h1>{this.props.title}</h1>
                 <img src={this.props.poster} alt={this.props.title} />
                 <ul>
+                    {/* renders full list of genres from reduxState */}
                     {this.props.genres.map((genre, i) =>
                         <li key={i}>{genre.name}</li>
                         )}

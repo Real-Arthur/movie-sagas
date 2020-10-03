@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
+// CONST //
 const initialState = {
     title: undefined,
     url: undefined,
@@ -10,15 +11,13 @@ const initialState = {
 }
 
 class MoviesForm extends Component {
-    
-
     state = {
         title: undefined,
         poster: undefined,
         description: undefined,
         genre_id: undefined
     }
-
+    // Handles setting the local state
     handleChangeFor = (event, propertyName) => {
         console.log('Button for', [propertyName]);
         console.log('Value', event.target.value);
@@ -27,15 +26,15 @@ class MoviesForm extends Component {
             [propertyName]: event.target.value
         })
     }
-
-    onChange = (event) => {
+    // Handles setting the genre state
+    onChangeGenre = (event) => {
         console.log('genres', event.target.value)
         this.setState({
             ...this.state,
             genre_id: parseInt(event.target.value)
         })
     }
-
+    // Handles send full state to CREATE_MOVIES saga
     saveMovieToDb = () => {
         console.log('save form button works', this.state)
         this.props.dispatch({
@@ -45,7 +44,7 @@ class MoviesForm extends Component {
         // kicks user back to home page
         this.props.history.push('/')
     }
-
+    // Resets state to const initial and sends user to landing page
     resetAndGoHome = () => {
         this.setState(
         // reverts state back to default
@@ -64,7 +63,7 @@ class MoviesForm extends Component {
                 <input type="text" onChange={(event) => this.handleChangeFor(event, 'title')} />
                 <input type="text" onChange={(event) => this.handleChangeFor(event, 'poster')} />
                 <textarea type="text" onChange={(event) => this.handleChangeFor(event, 'description')} />
-                <select name="genre" onChange={this.onChange} value={this.state.genre}>
+                <select name="genre" onChange={this.onChangeGenre} value={this.state.genre}>
                     <option value="1">Adventure</option>
                     <option value="2">Animated</option>
                     <option value="3">Biographical</option>
