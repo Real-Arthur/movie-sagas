@@ -61,7 +61,7 @@ function* createMoviesIdSaga(action) {
         data: action.payload
     })
     yield put({
-        type: 'SET_MOVIES'
+        type: 'FETCH_MOVIES'
     })
 }
 
