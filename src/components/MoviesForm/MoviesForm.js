@@ -2,7 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
+const initialState = {
+    title: undefined,
+    url: undefined,
+    description: undefined,
+    genre: undefined
+}
+
 class MoviesForm extends Component {
+    
+
     state = {
         title: undefined,
         url: undefined,
@@ -25,6 +34,15 @@ class MoviesForm extends Component {
             ...this.state,
             genre: event.target.value
         })
+    }
+
+    resetAndGoHome = () => {
+        this.setState(
+        // reverts state back to default
+        initialState
+        )
+        // kicks user back to home page
+        this.props.history.push('/')
     }
 
     render() {
@@ -51,6 +69,10 @@ class MoviesForm extends Component {
                     <option value="12">Space-Opera</option>
                     <option value="13">Superhero</option>
                 </select>
+                <div>
+                    <button>Save</button>
+                    <button onClick={() => this.resetAndGoHome()}>Cancel</button>
+                </div>
             </div>
         )
     }
