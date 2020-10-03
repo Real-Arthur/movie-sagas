@@ -16,14 +16,22 @@ class Home extends Component {
     }
 
     render() {
+        console.log('HOME REDUX STATE:', this.props.moviesList);
+        
         return(
             <div>
                 <p>Home Page</p>
+                {this.props.moviesList.map((movie) => 
+                    <p>{movie.title}</p>
+                )}
             </div>
         )
     }
 }
 
 
+const mapStateToProps = (reduxState) => ({
+    moviesList: reduxState.movies
+});
 
-export default connect()(Home);
+export default connect(mapStateToProps)(Home);
