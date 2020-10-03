@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 class Home extends Component {
     state = {
@@ -15,15 +16,26 @@ class Home extends Component {
         })
     }
 
+    goToDetails = (value) => {
+        console.log('POSTER BUTTON', value);
+        console.log('props', this.props);
+        this.props.history.push('/details')
+    }
+
     render() {
         console.log('HOME REDUX STATE:', this.props.moviesList);
         
         return(
             <div>
                 <p>Home Page</p>
+                <ul>
                 {this.props.moviesList.map((movie) => 
-                    <p>{movie.title}</p>
-                )}
+                    <li key={movie.id}>
+                        {movie.title}
+                        <img onClick={() => this.goToDetails(movie.title)} src={movie.poster} alt={`Poster of ${movie.title}`} />
+                        {movie.description}
+                    </li>
+                )}</ul>
             </div>
         )
     }
@@ -34,4 +46,4 @@ const mapStateToProps = (reduxState) => ({
     moviesList: reduxState.movies
 });
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps)(withRouter(Home));

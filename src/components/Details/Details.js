@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+
 
 class Details extends Component {
     state = {
@@ -18,4 +20,4 @@ class Details extends Component {
 }
 
 
-export default connect()(Details);
+export default connect()(withRouter(Details));
