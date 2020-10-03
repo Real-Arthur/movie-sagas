@@ -42,6 +42,8 @@ class MoviesForm extends Component {
             type: 'CREATE_MOVIES',
             payload: this.state
         })
+        // kicks user back to home page
+        this.props.history.push('/')
     }
 
     resetAndGoHome = () => {

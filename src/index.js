@@ -16,6 +16,7 @@ import { put, takeEvery } from 'redux-saga/effects';
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchMoviesSaga);
     yield takeEvery('FETCH_MOVIES_ID', fetchMoviesIdSaga);
+    yield takeEvery('FETCH_GENRES', fetchMoviesGenresSaga);
     yield takeEvery('CREATE_MOVIES', createMoviesIdSaga);
 }
 
@@ -60,7 +61,23 @@ function* createMoviesIdSaga(action) {
         data: action.payload
     })
     yield put({
-        type: 'FETCH_MOVIES'
+        type: 'SET_MOVIES'
+    })
+}
+
+function* fetchMoviesGenresSaga(action) {
+    console.log('fetchMoviesGenresSaga', action.type, action.payload)
+    let response = yield axios({
+        method: 'GET',
+        url: `/api/genre/${action.payload}`,
+        payload: {
+            id: action.payload
+        }
+    })
+    console.log('GENRES GET response data', response.data);
+    yield put({
+        type: 'SET_GENRES',
+        payload: response.data
     })
 }
 

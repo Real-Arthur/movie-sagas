@@ -23,6 +23,10 @@ class Home extends Component {
             type: 'FETCH_MOVIES_ID',
             payload: value
         })
+        this.props.dispatch({
+            type: 'FETCH_GENRES',
+            payload: value
+        })
         this.props.history.push('/details')
     }
 
