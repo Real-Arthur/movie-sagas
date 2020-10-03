@@ -5,6 +5,15 @@ class Home extends Component {
     state = {
 
     }
+    componentDidMount() {
+        this.getMovies();
+    }
+
+    getMovies = () => {
+        this.props.dispatch({
+            type: 'FETCH_MOVIES'
+        })
+    }
 
     render() {
         return(
@@ -14,6 +23,7 @@ class Home extends Component {
         )
     }
 }
+
 
 
 export default connect()(Home);
