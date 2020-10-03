@@ -13,6 +13,7 @@ class Details extends Component {
         this.props.dispatch({
             type: 'FETCH_MOVIES'
         })
+        this.props.history.push('/')
     }
 
     backToList = () => {
@@ -36,9 +37,9 @@ class Details extends Component {
 }
 
 const mapStateToProps = reduxState => ({
-    title: reduxState.movies.title,
-    description: reduxState.movies.description,
-    poster: reduxState.movies.poster
+    title: reduxState.currentMovie.title,
+    description: reduxState.currentMovie.description,
+    poster: reduxState.currentMovie.poster
 })
 
 export default connect(mapStateToProps)(withRouter(Details));
