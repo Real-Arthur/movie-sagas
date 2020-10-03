@@ -14,9 +14,9 @@ class MoviesForm extends Component {
 
     state = {
         title: undefined,
-        url: undefined,
+        poster: undefined,
         description: undefined,
-        genre: undefined
+        genre_id: undefined
     }
 
     handleChangeFor = (event, propertyName) => {
@@ -32,7 +32,15 @@ class MoviesForm extends Component {
         console.log('genres', event.target.value)
         this.setState({
             ...this.state,
-            genre: event.target.value
+            genre_id: parseInt(event.target.value)
+        })
+    }
+
+    saveMovieToDb = () => {
+        console.log('save form button works', this.state)
+        this.props.dispatch({
+            type: 'CREATE_MOVIES',
+            payload: this.state
         })
     }
 
@@ -52,7 +60,7 @@ class MoviesForm extends Component {
             <div>
                 <p>Movies Form</p>
                 <input type="text" onChange={(event) => this.handleChangeFor(event, 'title')} />
-                <input type="text" onChange={(event) => this.handleChangeFor(event, 'url')} />
+                <input type="text" onChange={(event) => this.handleChangeFor(event, 'poster')} />
                 <textarea type="text" onChange={(event) => this.handleChangeFor(event, 'description')} />
                 <select name="genre" onChange={this.onChange} value={this.state.genre}>
                     <option value="1">Adventure</option>
@@ -70,7 +78,7 @@ class MoviesForm extends Component {
                     <option value="13">Superhero</option>
                 </select>
                 <div>
-                    <button>Save</button>
+                    <button onClick={() => this.saveMovieToDb()}>Save</button>
                     <button onClick={() => this.resetAndGoHome()}>Cancel</button>
                 </div>
             </div>

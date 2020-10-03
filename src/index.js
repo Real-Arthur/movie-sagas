@@ -16,6 +16,7 @@ import { put, takeEvery } from 'redux-saga/effects';
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchMoviesSaga);
     yield takeEvery('FETCH_MOVIES_ID', fetchMoviesIdSaga);
+    yield takeEvery('CREATE_MOVIES', createMoviesIdSaga);
 }
 
 // Create sagaMiddleware
@@ -48,6 +49,18 @@ function* fetchMoviesIdSaga(action) {
     yield put({
         type: 'SET_MOVIES_ID',
         payload: response.data[0]
+    })
+}
+
+function* createMoviesIdSaga(action) {
+    console.log('createMoviesIdSaga', action.type, action.payload)
+    yield axios({
+        method: 'POST',
+        url: '/api/movie/',
+        data: action.payload
+    })
+    yield put({
+        type: 'FETCH_MOVIES'
     })
 }
 
