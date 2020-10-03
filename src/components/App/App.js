@@ -21,7 +21,7 @@ class App extends Component {
           <Route path="/details">
             <Details />
           </Route>
-          <Route path="/addMovies">
+          <Route path="/movieForm">
             <MoviesForm />
           </Route>
         </Router>
