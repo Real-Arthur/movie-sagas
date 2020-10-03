@@ -15,6 +15,7 @@ import { put, takeEvery } from 'redux-saga/effects';
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchMoviesSaga);
+    yield takeEvery('FETCH_MOVIES_ID', fetchMoviesIdSaga);
 }
 
 // Create sagaMiddleware
@@ -34,10 +35,28 @@ function* fetchMoviesSaga(action) {
     })
 }
 
+function* fetchMoviesIdSaga(action) {
+    console.log('fetchMoviesIdSaga', action.type, action.payload)
+    let response = yield axios({
+        method: 'GET',
+        url: `/api/movie/${action.payload}`,
+        params: {
+            id: action.payload
+        }
+    })
+    console.log('Response params id:', response.data[0]);
+    yield put({
+        type: 'SET_MOVIES_ID',
+        payload: response.data[0]
+    })
+}
+
 // Used to store movies returned from the server
 const movies = (state = [], action) => {
     switch (action.type) {
         case 'SET_MOVIES':
+            return action.payload;
+        case 'SET_MOVIES_ID':
             return action.payload;
         default:
             return state;

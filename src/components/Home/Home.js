@@ -19,6 +19,10 @@ class Home extends Component {
     goToDetails = (value) => {
         console.log('POSTER BUTTON', value);
         console.log('props', this.props);
+        this.props.dispatch({
+            type: 'FETCH_MOVIES_ID',
+            payload: value
+        })
         this.props.history.push('/details')
     }
 
@@ -32,7 +36,7 @@ class Home extends Component {
                 {this.props.moviesList.map((movie) => 
                     <li key={movie.id}>
                         {movie.title}
-                        <img onClick={() => this.goToDetails(movie.title)} src={movie.poster} alt={`Poster of ${movie.title}`} />
+                        <img onClick={() => this.goToDetails(movie.id)} src={movie.poster} alt={`Poster of ${movie.title}`} />
                         {movie.description}
                     </li>
                 )}</ul>
