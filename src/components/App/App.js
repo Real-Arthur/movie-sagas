@@ -3,8 +3,6 @@ import {HashRouter as Router, Route, Link} from 'react-router-dom';
 import './App.css';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
-import SvgIcon from '@material-ui/core/SvgIcon';
-import green from '@material-ui/core/colors/green';
 
 import Home from '../Home/Home';
 import Details from '../Details/Details';
@@ -21,7 +19,7 @@ class App extends Component {
         <Router>
           <Link to="/"><Button color="link" variant="contained" style={{textDecoration: 'none'}}>Home</Button></Link>
           <Link to="/movieForm"><Button color="link" variant="contained" style={{textDecoration: 'none'}}>Add A Movie</Button></Link>
-          {/* ADD PAGES! */}
+          
           <Route path="/" exact>
             <Home />
           </Route>
