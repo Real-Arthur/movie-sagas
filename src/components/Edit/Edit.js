@@ -1,4 +1,4 @@
-import { TextField } from '@material-ui/core';
+import { Button, TextField } from '@material-ui/core';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -74,8 +74,8 @@ class Edit extends Component {
                     />
                 </div>
                 <div>
-                    <button onClick={() => this.saveMovieToDb()}>Save</button>
-                    <button onClick={() => this.resetAndGoHome()}>Cancel</button>
+                    <Button variant="contained" color="primary" onClick={() => this.saveMovieToDb()}>Save</Button>
+                    <Button variant="outlined" onClick={() => this.resetAndGoHome()}>Cancel</Button>
                 </div>
             </div>
         )

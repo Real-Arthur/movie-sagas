@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import Typography from '@material-ui/core/Typography';
+import { Button, TextField } from '@material-ui/core';
 
 // CONST //
 const initialState = {
@@ -59,10 +61,10 @@ class MoviesForm extends Component {
         
         return(
             <div>
-                <p>Movies Form</p>
-                <input type="text" onChange={(event) => this.handleChangeFor(event, 'title')} />
-                <input type="text" onChange={(event) => this.handleChangeFor(event, 'poster')} />
-                <textarea type="text" onChange={(event) => this.handleChangeFor(event, 'description')} />
+                <Typography variant="h2">Add A Movie</Typography>
+                <TextField variant="outlined" label="Title" type="text" onChange={(event) => this.handleChangeFor(event, 'title')} />
+                <TextField variant="outlined" label="Poster link" type="text" onChange={(event) => this.handleChangeFor(event, 'poster')} />
+                <TextField multiline fullWidth variant="outlined" label="outlined" type="text" onChange={(event) => this.handleChangeFor(event, 'description')} />
                 <select name="genre" onChange={this.onChangeGenre} value={this.state.genre}>
                     <option value="1">Adventure</option>
                     <option value="2">Animated</option>
@@ -79,8 +81,8 @@ class MoviesForm extends Component {
                     <option value="13">Superhero</option>
                 </select>
                 <div>
-                    <button onClick={() => this.saveMovieToDb()}>Save</button>
-                    <button onClick={() => this.resetAndGoHome()}>Cancel</button>
+                    <Button variant="contained" color="primary" onClick={() => this.saveMovieToDb()}>Save</Button>
+                    <Button variant="outlined" color="primary" onClick={() => this.resetAndGoHome()}>Cancel</Button>
                 </div>
             </div>
         )
