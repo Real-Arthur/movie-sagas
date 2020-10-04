@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import Button from '@material-ui/core/Button'
+import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -15,11 +15,17 @@ class Details extends Component {
         this.props.history.push('/')
     }
 
+    toEditPage = () => {
+        console.log('To edit page works');
+        this.props.history.push('/edit')
+    }
+
     render() {
         console.log('Details Redux:', this.props.genres)
         return(
+            <div>
+            <h1>{this.props.title}</h1>
             <Card style={{maxWidth: '50%', margin: 'auto'}}>
-                <CardHeader>{this.props.title}</CardHeader>
                 <CardContent>
                 <CardMedia style={{display: 'inline-block'}}>
                 <img src={this.props.poster} alt={this.props.title} />
@@ -34,8 +40,9 @@ class Details extends Component {
                 <CardMedia>
                     {this.props.description}
                 </CardMedia>
-                <Button color='primary' onClick={() => this.refreshList()}>Back To Movie List</Button>
-            </Card>
+                <Button variant="contained" color='primary' onClick={() => this.refreshList()}>Back To Movie List</Button>
+                <Button variant="outlined" color="link" onClick={()=> this.toEditPage()}>Edit</Button>
+            </Card></div>
         )
     }
 }
