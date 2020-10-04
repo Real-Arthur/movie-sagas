@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid'
-import { Typography } from '@material-ui/core';
+import { Tooltip, Typography } from '@material-ui/core';
+
 
 class Home extends Component {
    // Calls getMovies on load
@@ -49,8 +50,10 @@ class Home extends Component {
                             </Typography>
                         </Grid>
                         <Grid item>
+                            <Tooltip title="See More Details" placement="right">
                         <img onClick={() => this.goToDetails(movie.id)} src={movie.poster} alt={`Poster of ${movie.title}`} />
-                            </Grid>
+                            </Tooltip>
+                        </Grid>
                         </Grid>
 
                         <Grid item xs={8}>
