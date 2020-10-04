@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import Grid from '@material-ui/core/Grid'
+import { Tooltip, Typography } from '@material-ui/core';
+
 
 class Home extends Component {
    // Calls getMovies on load
@@ -36,17 +39,35 @@ class Home extends Component {
         console.log('HOME REDUX STATE:', this.props.moviesList);
         
         return(
-            <div>
-                <p>Home Page</p>
-                <ul>
-                {this.props.moviesList.map((movie) => 
-                    <li key={movie.id}>
-                        {movie.title}
+                <Grid container xs={12}>
+                {this.props.moviesList.map((movie) =>
+                    <Grid container xs={6} alignItems="flex-end">
+
+                    <Grid item xs={4} container direction="column">
+                        <Grid item xs>
+                            <Typography variant="h4">
+                            {movie.title}
+                            </Typography>
+                        </Grid>
+                        <Grid item>
+                            <Tooltip title="See More Details" placement="right">
                         <img onClick={() => this.goToDetails(movie.id)} src={movie.poster} alt={`Poster of ${movie.title}`} />
+                            </Tooltip>
+                        </Grid>
+                        </Grid>
+
+                        <Grid item xs={8}>
+                            <Typography variant="body2">
                         {movie.description}
-                    </li>
-                )}</ul>
-            </div>
+                            </Typography>
+                        </Grid>
+                    
+                    
+
+                    </Grid>
+                )}
+                </Grid>
+            
         )
     }
 }
