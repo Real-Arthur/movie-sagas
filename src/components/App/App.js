@@ -17,8 +17,8 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
-          <Link to="/"><Button color="link" variant="contained" style={{textDecoration: 'none'}}>Home</Button></Link>
-          <Link to="/movieForm"><Button color="link" variant="contained" style={{textDecoration: 'none'}}>Add A Movie</Button></Link>
+          <Link to="/"><Button color="primary" variant="outlined" style={{textDecoration: 'none'}}>Home</Button></Link>
+          <Link to="/movieForm"><Button color="primary" variant="contained" style={{textDecoration: 'none'}}>Add A Movie</Button></Link>
           <Route path="/" exact>
             <Home />
           </Route>
