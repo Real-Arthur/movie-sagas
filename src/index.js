@@ -15,14 +15,15 @@ import { put, takeEvery } from 'redux-saga/effects';
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchMoviesSaga);
+    yield takeEvery('FETCH_ALL_GENRES', fetchAllGenresSaga);
     yield takeEvery('FETCH_MOVIES_ID', fetchMoviesIdSaga);
-    yield takeEvery('FETCH_GENRES', fetchMoviesGenresSaga);
+    yield takeEvery('FETCH_GENRES', fetchMovieGenresSaga);
     yield takeEvery('CREATE_MOVIES', createMoviesIdSaga);
     yield takeEvery('UPDATE_MOVIES', updateMoviesSaga);
 }
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
-// SAGAS //
+/// FETCH SAGAS ///
 // Saga used for fetching full movies list
 function* fetchMoviesSaga(action) {
     console.log('fetchMoviesSaga action:', action.type);
@@ -33,6 +34,19 @@ function* fetchMoviesSaga(action) {
     console.log('Movies data:', response.data);
     yield put({
         type: 'SET_MOVIES',
+        payload: response.data
+    })
+}
+// Saga used to fetch all movies of each genre
+function* fetchAllGenresSaga(action) {
+    console.log('fetchAllGenresSaga', action.type)
+    let response = yield axios({
+        method: 'GET',
+        url: '/api/genre'
+    })
+    console.log('Genres data:', response.data);
+    yield put({
+        type: 'SET_ALL_GENRES',
         payload: response.data
     })
 }
@@ -53,7 +67,7 @@ function* fetchMoviesIdSaga(action) {
     })
 }
 // Saga used to fetch genre of specific movie
-function* fetchMoviesGenresSaga(action) {
+function* fetchMovieGenresSaga(action) {
     console.log('fetchMoviesGenresSaga', action.type, action.payload)
     let response = yield axios({
         method: 'GET',
@@ -68,6 +82,7 @@ function* fetchMoviesGenresSaga(action) {
         payload: response.data
     })
 }
+/// CREATE SAGAS ///
 // Saga used to create new movie
 function* createMoviesIdSaga(action) {
     console.log('createMoviesIdSaga', action.type, action.payload)
@@ -80,6 +95,7 @@ function* createMoviesIdSaga(action) {
         type: 'FETCH_MOVIES'
     })
 }
+/// CREATE SAGAS ///
 // Saga used to update movies
 function* updateMoviesSaga(action) {
     console.log('updateMoviesSaga', action.type, action.payload)
@@ -123,13 +139,23 @@ const genres = (state = [], action) => {
             return state;
     }
 }
+// Used to store all movies in each genre
+const genresList = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_ALL_GENRES':
+            return action.payload;
+        default:
+            return state;
+    }
+}
 // REDUCERS END //
 // Create one store that all components can use
 const storeInstance = createStore(
     combineReducers({
         movies,
+        currentMovie,
         genres,
-        currentMovie
+        genresList
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),

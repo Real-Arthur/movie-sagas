@@ -33,7 +33,7 @@ class Details extends Component {
                 <CardContent style={{display: 'inline-block'}}>
                     {/* renders full list of genres from reduxState */}
                     {this.props.genres.map((genre, i) =>
-                        <Typography paragraph>{genre.name}</Typography>
+                        <Typography key={i} paragraph>{genre.name}</Typography>
                         )}
                 </CardContent>
                 </CardContent>
