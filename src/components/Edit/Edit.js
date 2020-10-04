@@ -1,3 +1,4 @@
+import { TextField } from '@material-ui/core';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -13,8 +14,8 @@ const initialState = {
 
 class Edit extends Component {
     state = {
-        title: undefined,
-        description: undefined,
+        title: this.props.title,
+        description: this.props.description,
     }
     // Handles setting the local state
     handleChangeFor = (event, propertyName) => {
@@ -54,14 +55,25 @@ class Edit extends Component {
     }
 
     render() {
-        console.log('state', this.state);
+        console.log('state', this.state)
+        console.log('title props', this.props.title);
+        console.log('description props', this.props.description);
         
         return(
             <div>
-                <p>Edit Page</p>
-                <input type="text" onChange={(event) => this.handleChangeFor(event, 'title')} />
-                <textarea type="text" onChange={(event) => this.handleChangeFor(event, 'description')} />
-                
+                <p>Edit Movie Details</p>
+                <div>
+                    <TextField 
+                    type="text" placeholder={this.props.title} value={this.state.title} 
+                    onChange={(event) => this.handleChangeFor(event, 'title')} 
+                    />
+                </div>
+                <div>
+                    <TextField multiline fullWidth variant="outlined" 
+                    type="text" placeholder={this.props.description} value={this.state.description} 
+                    onChange={(event) => this.handleChangeFor(event, 'description')} 
+                    />
+                </div>
                 <div>
                     <button onClick={() => this.saveMovieToDb()}>Save</button>
                     <button onClick={() => this.resetAndGoHome()}>Cancel</button>
@@ -72,7 +84,8 @@ class Edit extends Component {
 }
 
 const mapStateToProps = (reduxState) => ({
-    reduxState
+    title: reduxState.currentMovie.title,
+    description: reduxState.currentMovie.description
 });
 
 export default connect(mapStateToProps)(withRouter(Edit));
