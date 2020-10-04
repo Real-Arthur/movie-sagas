@@ -4,7 +4,9 @@ const pool = require('../modules/pool')
 
 router.get('/', (req, res) => {
   console.log('MOVIES ROUTER GET');
-  const movieQuery = `SELECT * FROM "movies";`;
+  const movieQuery = `
+  SELECT * FROM "movies"
+  ORDER BY "title" ASC;`;
   pool.query(movieQuery)
   .then((result) => {
     res.send(result.rows);
@@ -26,6 +28,21 @@ router.get('/:id', (req, res) => {
     console.log('ERROR MOVIE ROUTER', error)
     res.sendStatus(500);
   });
+})
+
+router.put('/edit/:id', (req, res) => {
+  console.log('MOVIES ID ROUTER PUT', req);
+  const movieQuery= `UPDATE "movies"
+  SET "title" = $1, "description" = $2
+  WHERE "id" = $3;`;
+  pool.query(movieQuery, [req.body.title, req.body.description, req.body.id])
+  .then((result) => {
+    res.send(result.rows)
+  })
+  .catch((error) => {
+    console.log('ERROR MOVIE PUT', error)
+    res.sendStatus(500);
+  })
 })
 
 router.post('/', (req, res) => {

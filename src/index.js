@@ -18,11 +18,11 @@ function* rootSaga() {
     yield takeEvery('FETCH_MOVIES_ID', fetchMoviesIdSaga);
     yield takeEvery('FETCH_GENRES', fetchMoviesGenresSaga);
     yield takeEvery('CREATE_MOVIES', createMoviesIdSaga);
+    yield takeEvery('UPDATE_MOVIES', updateMoviesSaga);
 }
-
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
-
+// SAGAS //
 // Saga used for fetching full movies list
 function* fetchMoviesSaga(action) {
     console.log('fetchMoviesSaga action:', action.type);
@@ -52,18 +52,6 @@ function* fetchMoviesIdSaga(action) {
         payload: response.data[0]
     })
 }
-// Saga used to create new movie
-function* createMoviesIdSaga(action) {
-    console.log('createMoviesIdSaga', action.type, action.payload)
-    yield axios({
-        method: 'POST',
-        url: '/api/movie/',
-        data: action.payload
-    })
-    yield put({
-        type: 'FETCH_MOVIES'
-    })
-}
 // Saga used to fetch genre of specific movie
 function* fetchMoviesGenresSaga(action) {
     console.log('fetchMoviesGenresSaga', action.type, action.payload)
@@ -80,6 +68,32 @@ function* fetchMoviesGenresSaga(action) {
         payload: response.data
     })
 }
+// Saga used to create new movie
+function* createMoviesIdSaga(action) {
+    console.log('createMoviesIdSaga', action.type, action.payload)
+    yield axios({
+        method: 'POST',
+        url: '/api/movie/',
+        data: action.payload
+    })
+    yield put({
+        type: 'FETCH_MOVIES'
+    })
+}
+// Saga used to update movies
+function* updateMoviesSaga(action) {
+    console.log('updateMoviesSaga', action.type, action.payload)
+    yield axios({
+        method: 'PUT',
+        url: `/api/movie/edit/${action.payload.id}`,
+        data: action.payload
+    })
+    yield put({
+        type: 'FETCH_MOVIES'
+    })
+}
+// SAGAS END //
+// REDUCERS //
 // Used to store movies returned from the server
 const movies = (state = [], action) => {
     switch (action.type) {
@@ -109,6 +123,7 @@ const genres = (state = [], action) => {
             return state;
     }
 }
+// REDUCERS END //
 // Create one store that all components can use
 const storeInstance = createStore(
     combineReducers({

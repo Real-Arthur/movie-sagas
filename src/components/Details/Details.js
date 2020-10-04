@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+
 
 class Details extends Component {
     // Sends user back to landing page
@@ -41,7 +41,7 @@ class Details extends Component {
                     {this.props.description}
                 </CardMedia>
                 <Button variant="contained" color='primary' onClick={() => this.refreshList()}>Back To Movie List</Button>
-                <Button variant="outlined" color="link" onClick={()=> this.toEditPage()}>Edit</Button>
+                <Button variant="outlined" color="secondary" onClick={()=> this.toEditPage()}>Edit</Button>
             </Card></div>
         )
     }

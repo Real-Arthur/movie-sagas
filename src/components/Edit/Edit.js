@@ -5,15 +5,14 @@ import { withRouter } from 'react-router-dom';
 
 // CONST //
 const initialState = {
+    id: undefined,
     title: undefined,
     description: undefined
 }
 
-
-
-
 class Edit extends Component {
     state = {
+        id: this.props.id,
         title: this.props.title,
         description: this.props.description,
     }
@@ -38,7 +37,7 @@ class Edit extends Component {
     saveMovieToDb = () => {
         console.log('save form button works', this.state)
         this.props.dispatch({
-            type: 'CREATE_MOVIES',
+            type: 'UPDATE_MOVIES',
             payload: this.state
         })
         // kicks user back to home page
@@ -84,6 +83,7 @@ class Edit extends Component {
 }
 
 const mapStateToProps = (reduxState) => ({
+    id: reduxState.currentMovie.id,
     title: reduxState.currentMovie.title,
     description: reduxState.currentMovie.description
 });
