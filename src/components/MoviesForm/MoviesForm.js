@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
-import { Button, TextField } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 
 // CONST //
 const initialState = {
