@@ -52,7 +52,11 @@ class Edit extends Component {
         // kicks user back to home page
         this.props.history.push('/')
     }
-
+    // This makes call to dispatch to delete movie forever
+    deleteMovieForever = () => {
+        console.log('Delete button works');
+        
+    }
     render() {
         console.log('state', this.state)
         console.log('title props', this.props.title);
@@ -76,6 +80,7 @@ class Edit extends Component {
                 <div>
                     <Button variant="contained" color="primary" onClick={() => this.saveMovieToDb()}>Save</Button>
                     <Button variant="outlined" onClick={() => this.resetAndGoHome()}>Cancel</Button>
+                    <Button variant="raised" color="secondary" onClick={() => this.deleteMovieForever(this.props.id)}>DELETE?</Button>
                 </div>
             </div>
         )

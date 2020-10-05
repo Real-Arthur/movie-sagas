@@ -16,7 +16,7 @@ The goal was to make a movie gallery app with functionality that allows user to 
 ## INSTALLATION
 
 1. Create a database named `saga_movies_weekend`
-2. Run queries from `database.sql` to create all necessary tables and populate tables with needed data
+2. Run queries from `database.sql` on the `saga_movies_weekend` to create all necessary tables and populate tables with needed data
 3. Run `npm install`
 4. Run `npm install @material-ui/core`
 5. Run `npm run server`
