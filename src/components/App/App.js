@@ -3,7 +3,6 @@ import {HashRouter as Router, Route, Link} from 'react-router-dom';
 import './App.css';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
-
 import Home from '../Home/Home';
 import Details from '../Details/Details';
 import MoviesForm from '../MoviesForm/MoviesForm';

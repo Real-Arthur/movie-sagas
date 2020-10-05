@@ -39,12 +39,21 @@ class MoviesForm extends Component {
     // Handles send full state to CREATE_MOVIES saga
     saveMovieToDb = () => {
         console.log('save form button works', this.state)
+        // Crude form validation
+        if(this.state.title !== undefined && 
+            this.state.poster !== undefined &&
+            this.state.description !== undefined &&
+            this.state.genre_id !== undefined
+            ) {
         this.props.dispatch({
             type: 'CREATE_MOVIES',
             payload: this.state
         })
         // kicks user back to home page
         this.props.history.push('/')
+        } else {
+            alert('Fill All Fields')
+        }
     }
     // Resets state to const initial and sends user to landing page
     resetAndGoHome = () => {
@@ -64,8 +73,9 @@ class MoviesForm extends Component {
                 <Typography variant="h2">Add A Movie</Typography>
                 <TextField variant="outlined" label="Title" type="text" onChange={(event) => this.handleChangeFor(event, 'title')} />
                 <TextField variant="outlined" label="Poster link" type="text" onChange={(event) => this.handleChangeFor(event, 'poster')} />
-                <TextField multiline fullWidth variant="outlined" label="outlined" type="text" onChange={(event) => this.handleChangeFor(event, 'description')} />
+                <TextField multiline fullWidth variant="outlined" label="Description" type="text" onChange={(event) => this.handleChangeFor(event, 'description')} />
                 <select name="genre" onChange={this.onChangeGenre} value={this.state.genre}>
+                    <option value={undefined}>Genre</option>
                     <option value="1">Adventure</option>
                     <option value="2">Animated</option>
                     <option value="3">Biographical</option>
@@ -81,8 +91,8 @@ class MoviesForm extends Component {
                     <option value="13">Superhero</option>
                 </select>
                 <div>
-                    <Button variant="contained" color="primary" onClick={() => this.saveMovieToDb()}>Save</Button>
-                    <Button variant="outlined" color="primary" onClick={() => this.resetAndGoHome()}>Cancel</Button>
+                    <button variant="contained" color="primary" onClick={() => this.saveMovieToDb()}>Save</button>
+                    <button variant="outlined" color="primary" onClick={() => this.resetAndGoHome()}>Cancel</button>
                 </div>
             </div>
         )

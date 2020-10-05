@@ -2,11 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid'
-import { CardContent, CardHeader, Divider, Tooltip, Typography } from '@material-ui/core';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
+import { CardContent, Divider, Tooltip, Typography } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
-import CardMedia from '@material-ui/core/CardMedia';
 
 
 class Home extends Component {
