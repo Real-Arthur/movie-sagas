@@ -10,6 +10,16 @@ import Typography from '@material-ui/core/Typography';
 
 class Details extends Component {
     // Sends user back to landing page
+    componentDidMount() {
+        console.log('this props match params', this.props.match.params);
+        
+
+
+        this.props.dispatch({
+            type: 'SELECT_MOVIE',
+            payload: this.props.match.params.movieId
+        })
+    }
     refreshList = () => {
         console.log('refresh button works');
         this.props.history.push('/')

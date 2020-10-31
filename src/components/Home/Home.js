@@ -34,7 +34,7 @@ class Home extends Component {
             payload: value
         })
         // Kicks user to details page
-        this.props.history.push('/details')
+        this.props.history.push(`/details/`)
     }
     // Starts FETCH_ALL_GENRES saga to initiate database GET call for genre list
     getGenres = () => {
@@ -44,7 +44,7 @@ class Home extends Component {
     }
 
     render() {
-        console.log('HOME REDUX STATE:', this.props.genresList);
+        console.log('HOME REDUX STATE:', this.props.currentMovie);
         return(
             <div>
                 {/* MOVIES CONTAINER */}
@@ -96,8 +96,7 @@ class Home extends Component {
 
 const mapStateToProps = (reduxState) => ({
     moviesList: reduxState.movies,
-    genresList: reduxState.genresList,
-    
+    genresList: reduxState.genresList
 });
 
 export default connect(mapStateToProps)(withRouter(Home));
